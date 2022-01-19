@@ -1,6 +1,6 @@
 service:
   spec:
-    loadBalancerIP: "34.95.93.54"
+    loadBalancerIP: '11.11.11.11'
 templates:
   preSharedCerts: rtd-entur-io,rtd-entur-org
   environment: rtd

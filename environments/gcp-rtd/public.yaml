@@ -1,10 +1,9 @@
 traefik:
   service:
     spec:
-      loadBalancerIP: "34.149.27.28"
+      loadBalancerIP: '00.000.00.00'
 
 templates:
   preSharedCerts: 'rtd-entur-io,rtd-entur-org'
   environment: rtd
   staticIpName: gke-entur-rtd-public-001
-
