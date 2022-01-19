@@ -1,0 +1,29 @@
+templates:
+  instanceType: api
+
+traefik:
+  nameOverride: traefik-v2-api
+  fullnameOverride: traefik-v2-api
+
+  providers:
+    kubernetesIngress:
+      labelSelector: traffic-type=api
+      namespaces:
+        - traefik-v2-api
+      publishedService:
+        enabled: true
+        # Published Kubernetes Service to copy status from. Format: namespace/servicename
+        pathOverride: "traefik-v2-api/traefik-v2-api"
+
+  service:
+    annotations:
+      cloud.google.com/backend-config: '{"default": "traefik-v2-api-backend"}'
+      cloud.google.com/neg: '{"ingress": true}'
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "60Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"

@@ -1,0 +1,7 @@
+service:
+  spec:
+    loadBalancerIP: "34.95.93.54"
+templates:
+  preSharedCerts: rtd-entur-io,rtd-entur-org
+  environment: rtd
+  staticIpName: gke-entur-rtd-api-001

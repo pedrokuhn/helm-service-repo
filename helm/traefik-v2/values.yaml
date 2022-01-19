@@ -1,0 +1,133 @@
+traefik:
+  image:
+    name: traefik
+    tag: "2.5.6"
+    pullPolicy: IfNotPresent
+
+  additionalArguments:
+    - "--ping=true"
+    - "--ping.entrypoint=web"
+    - "--metrics.prometheus.buckets=0.1,0.3,1.2,5.0,60.0"
+
+  globalArguments:
+    - "--global.checknewversion"
+
+  ports:
+    traefik:
+      expose: false
+      port: 8080
+      healthchecksPort: 80
+      exposedPort: 8080
+      protocol: TCP
+    web:
+      expose: true
+      port: 80
+      exposedPort: 80
+      protocol: TCP
+    websecure:
+      expose: false
+    metrics:
+      expose: false
+
+  service:
+    enabled: true
+    type: ClusterIP
+    labels:
+      team: plattform
+      slack: talk-plattform
+      type: system
+
+  deployment:
+    labels:
+      team: plattform
+      slack: talk-plattform
+      type: system
+
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 25%
+
+  ingressClass:
+    enabled: true
+    fallbackApiVersion: "v1"
+
+  ingressRoute:
+    dashboard:
+      enabled: false
+
+  providers:
+    kubernetesCRD:
+      enabled: false
+
+    kubernetesIngress:
+      enabled: true
+      allowExternalNameServices: false
+
+  logs:
+    general:
+      format: json
+      # Alternative logging levels are DEBUG, PANIC, FATAL, ERROR, WARN, and INFO.
+      level: INFO
+    access:
+      # To enable access logs
+      enabled: true
+      format: json
+      fields:
+        general:
+          defaultmode: keep
+          names:
+            {}
+            # Examples:
+            # ClientUsername: drop
+        headers:
+          defaultmode: keep
+          names:
+            {}
+            # # User-Agent: redact
+            # Authorization: drop
+            # ET-Client-Name: keep
+
+  metrics:
+    prometheus:
+      entryPoint: metrics
+
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 20
+    metrics:
+      - type: Resource
+        resource:
+          name: cpu
+          targetAverageUtilization: 65
+      - type: Resource
+        resource:
+          name: memory
+          targetAverageUtilization: 65
+
+  rbac:
+    enabled: true
+    namespaced: true
+
+  #TODO: should be enabled?
+  # Enable to create a PodSecurityPolicy and assign it to the Service Account via RoleBinding or ClusterRoleBinding
+  podSecurityPolicy:
+    enabled: false
+
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - "traefik"
+          topologyKey: kubernetes.io/hostname
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - "traefik"
+          topologyKey: topology.kubernetes.io/zone

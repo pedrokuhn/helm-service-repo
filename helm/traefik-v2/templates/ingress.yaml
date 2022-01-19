@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.gcp.kubernetes.io/pre-shared-cert: {{ .Values.templates.preSharedCerts }}
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.global-static-ip-name: {{ .Values.templates.staticIpName }}
+    networking.gke.io/v1beta1.FrontendConfig: traefik-v2-{{ .Values.templates.instanceType }}-frontend
+  labels:
+    app: traefik-v2-{{ .Values.templates.instanceType }}
+    environment: {{ .Values.templates.environment }}
+    slack: talk-plattform
+    team: plattform
+    type: system
+  name: traefik-v2-{{ .Values.templates.instanceType }}-ingress
+  namespace: traefik-v2-{{ .Values.templates.instanceType }}
+spec:
+  defaultBackend:
+    service:
+      name: traefik-v2-{{ .Values.templates.instanceType }}
+      port:
+        number: 80
+---
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  labels:
+    app: traefik-v2-{{ .Values.templates.instanceType }}
+    environment: {{ .Values.templates.environment }}
+    slack: talk-plattform
+    team: plattform
+    type: system
+  name: traefik-v2-{{ .Values.templates.instanceType }}-frontend
+  namespace: traefik-v2-{{ .Values.templates.instanceType }}
+spec:
+  redirectToHttps:
+    enabled: true
+    responseCodeName: FOUND
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  labels:
+    app: traefik-v2-{{ .Values.templates.instanceType }}
+    environment: {{ .Values.templates.environment }}
+    slack: talk-plattform
+    team: plattform
+    type: system
+  name: traefik-v2-{{ .Values.templates.instanceType }}-backend
+  namespace: traefik-v2-{{ .Values.templates.instanceType }}
+spec:
+  healthCheck:
+    requestPath: /ping
+    type: HTTP
+  securityPolicy:
+    name: gke-{{ .Values.templates.instanceType }}
+  timeoutSec: 60

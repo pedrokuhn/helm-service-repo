@@ -1,0 +1,30 @@
+templates:
+  instanceType: internal
+
+traefik:
+  nameOverride: traefik-v2-internal
+  fullnameOverride: traefik-v2-internal
+
+  providers:
+    kubernetesIngress:
+      labelSelector: traffic-type=internal
+      namespaces:
+        - traefik-v2-internal
+      publishedService:
+        enabled: true
+        # Published Kubernetes Service to copy status from. Format: namespace/servicename
+        pathOverride: "traefik-v2-internal/traefik-v2-internal"
+
+  # additionalArguments:
+  #   - --api.insecure
+  #   - --accesslog
+  #   - --entrypoints.web.Address=:80
+  #   - --log.level=DEBUG
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "50Mi"
+    limits:
+      cpu: "300m"
+      memory: "150Mi"

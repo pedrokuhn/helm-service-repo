@@ -1,0 +1,28 @@
+templates:
+  instanceType: public
+
+traefik:
+  nameOverride: traefik-v2-public
+  fullnameOverride: traefik-v2-public
+
+  providers:
+    kubernetesIngress:
+      labelSelector: traffic-type=public
+      namespaces:
+        - traefik-v2-public
+      publishedService:
+        enabled: true
+        pathOverride: "traefik-v2-public/traefik-v2-public"
+
+  service:
+    annotations:
+      cloud.google.com/backend-config: '{"default": "traefik-v2-public-backend"}'
+      cloud.google.com/neg: '{"ingress": true}'
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "60Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"

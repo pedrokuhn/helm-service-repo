@@ -1,0 +1,10 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: traefik-v2-{{ .Values.templates.instanceType }}
+  labels:
+    name: traefik-v2-{{ .Values.templates.instanceType }} 
+    environment: {{ .Values.templates.environment }}
+    slack: talk-plattform
+    team: plattform
+    type: system
