@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "accurint.fullname" . }}
   labels:
+    {{.Values.labels.tags.test.com/teste}}
     {{- include "accurint.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
