@@ -4,6 +4,10 @@
 
 replicaCount: 1
 
+labels:
+  tags:
+    test.com/teste: "test"
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent
