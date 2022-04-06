@@ -40,7 +40,7 @@ helm.sh/chart: {{ include "accurint.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-test.com/teste: {{required .Values.labels.tags.test.com/teste}}
+test.com/teste: {{required index .Values.labels.tags "test.com/teste"}}
 {{- end }}
 
 
