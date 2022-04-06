@@ -5,8 +5,7 @@
 replicaCount: 1
 
 labels:
-  tagss:
-    test.com/teste: "test"
+  tagss: 'test.com/teste: "test"'
 
 image:
   repository: nginx
