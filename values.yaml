@@ -5,7 +5,7 @@
 replicaCount: 1
 
 labels:
-  tags:
+  tagss:
     test.com/teste: "test"
 
 image:
