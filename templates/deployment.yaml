@@ -18,15 +18,15 @@ spec:
         image: nginx:1.21.6-alpine
         ports:
         - containerPort: 80
-        volumeMounts:
-          - name: mnt
-            mountPath: /usr/share/nginx/html/index.html
-            subPath: file-from-cfgmap
+#         volumeMounts:
+#           - name: mnt
+#             mountPath: /usr/share/nginx/html/index.html
+#             subPath: file-from-cfgmap
 ###### Mount the config map
       volumes:
       - emptyDir: {}
         name: log-storage
-      - name: mnt
-        configMap:
-          name: nginx-cfgmap
+#       - name: mnt
+#         configMap:
+#           name: nginx-cfgmap
 
