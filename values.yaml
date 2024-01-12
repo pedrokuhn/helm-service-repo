@@ -12,7 +12,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  tag: "library/nginx:stableasdasdasdasda"
+  tag: "library/nginx:stable"
 
 serviceAccount:
   # Specifies whether a service account should be created
