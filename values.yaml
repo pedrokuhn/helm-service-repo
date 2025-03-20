@@ -5,7 +5,7 @@
 replicaCount: 1
 
 labels:
-  tags: "test"
+  tags: <+secrets.getValue("account.test")>
 
 imagePullSecrets: []
 nameOverride: ""
