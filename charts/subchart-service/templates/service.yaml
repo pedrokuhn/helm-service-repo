@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: subchart-service
+spec:
+  selector:
+    app: subchart-service
+  ports:
+    - port: 6379
+      targetPort: 6379

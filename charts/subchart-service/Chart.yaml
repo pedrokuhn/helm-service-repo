@@ -1,0 +1,4 @@
+apiVersion: v2
+name: subchart-service
+description: A subchart that deploys a service
+version: 0.1.0
