@@ -10,7 +10,7 @@ mainApp:
 subchartService:
   replicaCount: 1
   namespace: <+infra.namespace>
-  test: chart-<+secrets.getValue("account.test")>-example.local----chart-<+infra.namespace>-example.local
+  test: 'chart-<+secrets.getValue("account.test")>-example.local----chart-<+infra.namespace>-example.local'
   image:
     repository: redis
     tag: latest
