@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: main-app
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.mainApp.namespace }}
 spec:
   replicas: {{ .Values.mainApp.replicaCount }}
   selector:
@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: main-app
-        app2: {{ .Values.test }}
+        app2: {{ .Values.mainApp.test }}
     spec:
       containers:
         - name: main-app
