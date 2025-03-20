@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: {{ .Values.fullName }}
+  name: pedro
   labels:
   {{- with .Values.ingress.annotations }}
   annotations:
@@ -27,7 +27,7 @@ spec:
           {{- range .paths }}
           - path: {{ .path }}
             backend:
-              serviceName: {{ .Values.fullName }}
+              serviceName: pedro
               servicePort: 123
           {{- end }}
     {{- end }}
