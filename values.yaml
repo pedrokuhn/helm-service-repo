@@ -8,8 +8,8 @@ labels:
   tags: ""
 
 imagePullSecrets: []
-nameOverride: "pedro-test"
-fullnameOverride: "pedro-test"
+nameOverride: ""
+fullnameOverride: ""
 
 image:
   tag: "library/nginx:stable"
