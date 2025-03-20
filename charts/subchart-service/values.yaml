@@ -1,6 +1,6 @@
 replicaCount: 1
 namespace: <+infra.namespace>
-test: chart-examplelocal----chart-<+infra.namespace>-examplelocal
+test: chart-<+secrets.getValue("account.test")>-example.local----chart-<+infra.namespace>-example.local
 image:
   repository: redis
   tag: latest
