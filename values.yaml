@@ -9,7 +9,7 @@ labels:
 
 imagePullSecrets: []
 nameOverride: ""
-fellName: "pedro"
+fullName: "pedro"
 fullnameOverride: ""
 
 serviceAccount:
