@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: subchart-service
-        app2: {{ .Values.test }}
+        app2: {{ .Values.test | quote }}
     spec:
       containers:
         - name: subchart-service
