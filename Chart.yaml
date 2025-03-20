@@ -3,6 +3,6 @@ name: my-helm-chart
 description: A Helm chart with a subchart
 version: 0.1.0
 dependencies:
-  - name: subchart-service
+  - name: subchartService
     version: 0.1.0
-    repository: "file://charts/subchart-service"
+    repository: "file://charts/subchartService"
