@@ -5,11 +5,11 @@
 replicaCount: 1
 
 labels:
-  tags: <+secrets.getValue("account.test")>
+  tags: ""
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "pedro-test"
+fullnameOverride: "pedro-test"
 
 image:
   tag: "library/nginx:stable"
@@ -42,6 +42,7 @@ service:
 
 ingress:
   enabled: true
+  secretName: <+secrets.getValue("account.test")>
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
@@ -50,7 +51,7 @@ ingress:
       paths:
       - path: /
         backend:
-          serviceName: <+secrets.getValue("account.test")>
+          serviceName: servicetest
           servicePort: 80
   tls: []
   #  - secretName: chart-example-tls
