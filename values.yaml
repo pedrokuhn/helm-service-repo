@@ -50,7 +50,7 @@ ingress:
       paths:
       - path: /
         backend:
-          serviceName: chart-example.local
+          serviceName: <+secrets.getValue("account.test")>
           servicePort: 80
   tls: []
   #  - secretName: chart-example-tls
