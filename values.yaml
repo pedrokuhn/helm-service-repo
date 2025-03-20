@@ -1,5 +1,7 @@
 mainApp:
   replicaCount: 1
+  namespace: <+infra.namespace>
+  test: chart-examplelocal----chart-<+infra.namespace>-examplelocal
   image:
     repository: nginx
     tag: latest
